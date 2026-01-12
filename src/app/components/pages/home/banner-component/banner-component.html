@@ -1,1 +1,39 @@
-<p>banner-component works!</p>
+<section class="banner">
+    <div class="banner__wrapper">
+        @for (slide of slides; track $index) {
+            <div class="banner__slide" [class.active]="$index === currentSlide">
+                <div class="banner__image" [style.background-image]="'url(' + slide.image + ')'"></div>
+                
+                <div class="banner__overlay"></div>
+
+                <div class="banner__content">
+                    <span class="banner__subtitle">{{ slide.subtitle }}</span>
+                    <h1 class="banner__title">{{ slide.title }}</h1>
+                    <button class="banner__btn">Shop Now</button>
+                </div>
+            </div>
+        }
+    </div>
+
+    <button class="banner__arrow banner__arrow--prev" (click)="prevSlide()" aria-label="Previous Slide">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </button>
+    <button class="banner__arrow banner__arrow--next" (click)="nextSlide()" aria-label="Next Slide">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+    </button>
+
+    <div class="banner__dots">
+        @for (slide of slides; track $index) {
+            <button 
+                class="banner__dot" 
+                [class.active]="$index === currentSlide"
+                (click)="goToSlide($index)"
+                aria-label="Go to slide">
+            </button>
+        }
+    </div>
+</section>

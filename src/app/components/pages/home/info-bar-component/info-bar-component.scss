@@ -1,0 +1,76 @@
+// info-bar-component.scss
+
+$color-text: #1a1a1a;
+$color-subtext: #666;
+// Cor de fundo leve (similar à imagem enviada)
+$bg-color: #E8EBE9; 
+$icon-color: #8C7B60; // Tom dourado/marrom da imagem
+$breakpoint-mobile: 768px;
+
+.info-bar {
+    background-color: $bg-color;
+    padding: 60px 5%;
+    width: 100%;
+
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        max-width: 1400px;
+        margin: 0 auto;
+        gap: 30px;
+
+        // No mobile, vira um grid 2x2
+        @media (max-width: $breakpoint-mobile) {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px 20px;
+        }
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        flex: 1;
+    }
+
+    &__icon-circle {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: rgba($icon-color, 0.1); // Círculo com transparência
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        color: $icon-color;
+        transition: transform 0.3s ease;
+
+        svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    &__title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: $color-text;
+        margin-bottom: 8px;
+        letter-spacing: 0.5px;
+        font-family: 'Helvetica Neue', sans-serif; // Ou a fonte que estiver usando
+    }
+
+    &__subtitle {
+        font-size: 0.85rem;
+        color: $color-subtext;
+        line-height: 1.4;
+        max-width: 200px;
+    }
+}
