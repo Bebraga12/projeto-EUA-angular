@@ -1,141 +1,176 @@
-$color-text: #1a1a1a;
-$nav-height: 80px;
-$breakpoint-mobile: 768px;
-$nav-bg-solid: #FAF9F6; 
+// Variáveis básicas
+$text-color: #ffffff;
+$primary-btn-bg: #3a3a4e; // Tom azulado escuro do botão
+$font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
+.menu-container {
+  position: relative;
+  width: 100%;
+  height: 80vh; // Altura do banner (ajuste para 100vh se quiser tela cheia)
+  overflow: hidden;
+  font-family: $font-family;
+  color: $text-color;
+}
+
+/* --- Navbar --- */
 .navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  z-index: 10;
+  box-sizing: border-box;
+
+  .nav-brand {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .nav-links {
+    list-style: none;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: $nav-height;
-    padding: 0 5%;
-    position: sticky;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+
+    li a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.9rem;
+      transition: color 0.3s;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+
+  .nav-icon {
+    cursor: pointer;
+  }
+}
+
+/* --- Slider Background --- */
+.slider-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+
+  .slide {
+    position: absolute;
     top: 0;
-    
-    background-color: var(--header-bg-color);
-    
-    backdrop-filter: blur(12px); 
-    -webkit-backdrop-filter: blur(12px); 
-    
-    z-index: 1000;
-    border-bottom: 1px solid rgba(0,0,0,0.03);
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
 
-    &__logo {
-        font-size: 1.5rem;
-        font-weight: 700;
-        letter-spacing: 2px;
-        text-decoration: none;
-        color: $color-text;
-        z-index: 1001;
+    &.active {
+      opacity: 1;
+    }
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    // Gradiente sutil para escurecer o fundo e destacar o texto
+    background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 100%);
+  }
+}
+
+/* --- Hero Content --- */
+.hero-content {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding-left: 60px; // Espaçamento da esquerda
+  max-width: 500px;
+
+  h1 {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-style: italic; // Para dar o estilo do exemplo
+    line-height: 1.1;
+  }
+
+  p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 15px;
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.2s;
+
+      &:hover {
+        transform: translateY(-2px);
+      }
     }
 
-    &__menu {
-        @media (max-width: $breakpoint-mobile) {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            height: 100vh;
-            background: $nav-bg-solid;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-            
-            &.active {
-                right: 0;
-            }
-        }
+    .btn-primary {
+      background-color: $primary-btn-bg;
+      color: #fff;
     }
 
-    &__list {
-        list-style: none;
-        display: flex;
-        gap: 40px;
-
-        @media (max-width: $breakpoint-mobile) {
-            flex-direction: column;
-            text-align: center;
-            gap: 30px;
-        }
+    .btn-outline {
+      background-color: #fff;
+      color: #000;
     }
+  }
+}
 
-    &__link {
-        text-decoration: none;
-        color: $color-text;
-        font-size: 0.9rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        position: relative;
-        transition: opacity 0.3s ease;
-        cursor: pointer;
+// Animação simples de entrada
+.fade-in {
+  animation: fadeInMove 1s ease-out forwards;
+}
 
-        &::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: $color-text;
-            transition: width 0.3s ease;
-        }
+@keyframes fadeInMove {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-        &:hover {
-            opacity: 0.7;
-            &::after {
-                width: 100%;
-            }
-        }
-    }
-
-    &__actions {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        z-index: 1001;
-    }
-
-    &__icon {
-        background: none;
-        border: none;
-        cursor: pointer;
-        color: $color-text;
-        display: flex;
-        transition: transform 0.2s ease;
-
-        &:hover {
-            transform: scale(1.1);
-        }
-    }
-
-    &__toggle {
-        display: none;
-        flex-direction: column;
-        gap: 6px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        z-index: 1001;
-
-        .bar {
-            width: 25px;
-            height: 1px;
-            background-color: $color-text;
-            transition: all 0.3s ease;
-        }
-
-        @media (max-width: $breakpoint-mobile) {
-            display: flex;
-        }
-
-        &.active {
-            .bar:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 5px);
-            }
-            .bar:nth-child(2) {
-                transform: rotate(-45deg) translate(0px, -1px);
-            }
-        }
-    }
+// Responsividade Mobile
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 20px;
+    .nav-links { display: none; } // Esconder links no mobile para simplificar
+  }
+  
+  .hero-content {
+    padding-left: 20px;
+    h1 { font-size: 2.5rem; }
+  }
 }

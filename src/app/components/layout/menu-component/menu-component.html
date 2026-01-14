@@ -1,45 +1,38 @@
-<header class="navbar">
-    <a href="#" class="navbar__logo">STORE</a>
+<div class="menu-container">
+  
+  <nav class="navbar">
+    <div class="nav-brand">Midnight Artist</div>
+    
+    <ul class="nav-links">
+      <li><a href="#">Men's</a></li>
+      <li><a href="#">Women's</a></li>
+      <li><a href="#">Accessories</a></li>
+      <li><a href="#">Contact Us</a></li>
+    </ul>
 
-    <nav class="navbar__menu" [class.active]="isMenuOpen">
-        <ul class="navbar__list">
-            <li class="navbar__item">
-                <a href="#" class="navbar__link" (click)="closeMenu()">New Arrivals</a>
-            </li>
-            <li class="navbar__item">
-                <a href="#" class="navbar__link" (click)="closeMenu()">Women</a>
-            </li>
-            <li class="navbar__item">
-                <a href="#" class="navbar__link" (click)="closeMenu()">Men</a>
-            </li>
-            <li class="navbar__item">
-                <a href="#" class="navbar__link" (click)="closeMenu()">Accessories</a>
-            </li>
-            <li class="navbar__item">
-                <a href="#" class="navbar__link" (click)="closeMenu()">Editorial</a>
-            </li>
-        </ul>
-    </nav>
-
-    <div class="navbar__actions">
-        <button class="navbar__icon" aria-label="Search">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-        </button>
-        
-        <button class="navbar__icon" aria-label="Cart">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <path d="M16 10a4 4 0 0 1-8 0"></path>
-            </svg>
-        </button>
-
-        <button class="navbar__toggle" [class.active]="isMenuOpen" (click)="toggleMenu()" aria-label="Menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </button>
+    <div class="nav-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
     </div>
-</header>
+  </nav>
+
+  <div class="slider-background">
+    <div 
+      class="slide" 
+      *ngFor="let slide of slides; let i = index"
+      [class.active]="i === currentSlideIndex"
+      [style.backgroundImage]="'url(' + slide.url + ')'">
+    </div>
+    <div class="overlay"></div>
+  </div>
+
+  <div class="hero-content">
+    <h1 class="fade-in">New Arrivals</h1>
+    <p class="fade-in">Minimal streetwear without the fluff.</p>
+    
+    <div class="cta-buttons fade-in">
+      <button class="btn btn-primary">Shop Now</button>
+      <button class="btn btn-outline">View Lookbook</button>
+    </div>
+  </div>
+
+</div>
