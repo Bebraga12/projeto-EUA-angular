@@ -12,9 +12,9 @@ export class MenuComponent implements OnInit, OnDestroy {
 
 
   slides = [
-    { url: 'assets/banner/fundoHeader.png', alt: 'Slide 1' },
+    { url: 'assets/banner/teste2.jpg', alt: 'Slide 1' },
     { url: 'assets/banner/fundoHeader.png', alt: 'Slide 2' }, 
-    { url: 'assets/banner/fundoHeader.png', alt: 'Slide 3' }  
+    { url: 'assets/banner/teste.jpg', alt: 'Slide 3' }  
   ];
 
   currentSlideIndex = 0;
@@ -38,5 +38,6 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   nextSlide() {
     this.currentSlideIndex = (this.currentSlideIndex + 1) % this.slides.length;
+    console.log('Slide atual:', this.currentSlideIndex, 'URL:', this.slides[this.currentSlideIndex].url);
   }
 }
