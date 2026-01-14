@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, OnInit, OnDestroy, NgZone, ChangeDetectorRef, Inject, PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-menu-component',
@@ -9,35 +9,39 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./menu-component.scss']
 })
 export class MenuComponent implements OnInit, OnDestroy {
-
-
   slides = [
-    { url: 'assets/banner/teste2.jpg', alt: 'Slide 1' },
-    { url: 'assets/banner/fundoHeader.png', alt: 'Slide 2' }, 
-    { url: 'assets/banner/teste.jpg', alt: 'Slide 3' }  
+    { url: 'assets/banner/teste2.jpg', title: 'New Arrivals', sub: 'Minimal streetwear without the fluff.' },
+    { url: 'assets/banner/fundoHeader.png', title: 'Midnight Edition', sub: 'Exclusive drop available now.' },
+    { url: 'assets/banner/teste.jpg', title: 'Winter Collection', sub: 'Designed for the elements.' }
   ];
 
   currentSlideIndex = 0;
   intervalId: any;
 
-  ngOnInit(): void {
-    this.startSlider();
-  }
+  constructor(
+    private ngZone: NgZone, 
+    private cdr: ChangeDetectorRef,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
-  ngOnDestroy(): void {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.startSlider();
     }
   }
 
-  startSlider() {
-    this.intervalId = setInterval(() => {
-      this.nextSlide();
-    }, 5000); 
+  ngOnDestroy(): void {
+    if (this.intervalId) clearInterval(this.intervalId);
   }
 
-  nextSlide() {
-    this.currentSlideIndex = (this.currentSlideIndex + 1) % this.slides.length;
-    console.log('Slide atual:', this.currentSlideIndex, 'URL:', this.slides[this.currentSlideIndex].url);
+  startSlider() {
+    this.ngZone.runOutsideAngular(() => {
+      this.intervalId = setInterval(() => {
+        this.ngZone.run(() => {
+          this.currentSlideIndex = (this.currentSlideIndex + 1) % this.slides.length;
+          this.cdr.markForCheck();
+        });
+      }, 8000);
+    });
   }
 }

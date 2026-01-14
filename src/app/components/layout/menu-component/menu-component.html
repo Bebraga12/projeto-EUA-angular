@@ -1,17 +1,5 @@
 <div class="menu-container">
-  <nav class="navbar">
-    <div class="nav-brand">MIDNIGHT ARTIST</div>
-    <ul class="nav-links">
-      <li><a href="#">Mens</a></li>
-      <li><a href="#">Womens</a></li>
-      <li><a href="#">Accessories</a></li>
-      <li><a href="#">Contact Us</a></li>
-    </ul>
-    <div class="nav-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-    </div>
-  </nav>
-
+  
   <div class="slider-background">
     <div 
       class="slide" 
@@ -22,12 +10,31 @@
     <div class="overlay"></div>
   </div>
 
+  <nav class="navbar">
+    <div class="nav-brand">MIDNIGHT ARTIST</div>
+    <ul class="nav-links">
+      <li><a href="#">Mens</a></li>
+      <li><a href="#">Womens</a></li>
+      <li><a href="#">Accessories</a></li>
+      <li><a href="#">Contact Us</a></li>
+    </ul>
+    <div class="nav-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+    </div>
+  </nav>
+
   <div class="hero-content">
-    <h1>New Arrivals</h1>
-    <p>Minimal streetwear without the fluff.</p>
+    <div class="text-animate-wrapper">
+      <h1 class="title">{{ slides[currentSlideIndex].title || 'New Arrivals' }}</h1>
+      <p class="subtitle">{{ slides[currentSlideIndex].sub || 'Minimal streetwear without the fluff.' }}</p>
+    </div>
     <div class="cta-buttons">
       <button class="btn btn-primary">Shop Now</button>
       <button class="btn btn-outline">View Lookbook</button>
     </div>
   </div>
+
 </div>
