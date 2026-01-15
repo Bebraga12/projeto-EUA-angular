@@ -1,1 +1,43 @@
-<p>login-component works!</p>
+<div class="login-container">
+  <div class="login-box">
+    <div class="brand-logo">MIDNIGHT</div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+      
+      <div *ngIf="!showPasswordStep" class="fade-in">
+        <h1>Enter your email to join us<br>or sign in.</h1>
+        
+        <div class="input-wrapper">
+          <input type="email" formControlName="email" id="email" placeholder=" " required autocomplete="off">
+          <label for="email">Email*</label>
+          
+          <div class="error-msg" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
+            Please enter a valid email address.
+          </div>
+        </div>
+
+        <p class="terms">
+          By continuing, you agree to Midnight's <a href="#">Privacy Policy</a> and <a href="#">Terms of Use</a>.
+        </p>
+
+        <button type="button" class="btn-black" (click)="proceedToPassword()">Continue</button>
+      </div>
+
+      <div *ngIf="showPasswordStep" class="fade-in">
+        <h1>Enter your password<br>to continue.</h1>
+        <p class="user-display">
+          {{ loginForm.get('email')?.value }} 
+          <span class="edit-link" (click)="editEmail()">(Edit)</span>
+        </p>
+
+        <div class="input-wrapper">
+          <input type="password" formControlName="password" id="password" placeholder=" " required>
+          <label for="password">Password*</label>
+        </div>
+
+        <button type="submit" class="btn-black" [disabled]="loginForm.get('password')?.invalid">Sign In</button>
+      </div>
+
+    </form>
+  </div>
+</div>

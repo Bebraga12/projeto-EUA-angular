@@ -1,0 +1,116 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #fff;
+  padding-top: 80px;
+  font-family: "Helvetica Now", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.login-box {
+  width: 100%;
+  max-width: 440px;
+  padding: 0 20px;
+  
+  .brand-logo {
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 25px;
+  }
+
+  h1 {
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 25px;
+    color: #111;
+  }
+}
+
+.input-wrapper {
+  position: relative;
+  margin-bottom: 20px;
+
+  input {
+    width: 100%;
+    padding: 18px 12px 10px;
+    font-size: 16px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    background: #fff !important; 
+    outline: none;
+    box-sizing: border-box;
+
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 50px white inset !important;
+    }
+
+    &:focus { border-color: #111; }
+
+    &:focus + label,
+    &:not(:placeholder-shown) + label {
+      top: -8px;
+      left: 10px;
+      font-size: 11px;
+      color: #757575;
+      background: white;
+      padding: 0 4px;
+    }
+  }
+
+  label {
+    position: absolute;
+    left: 12px;
+    top: 16px;
+    color: #757575;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+.btn-black {
+  width: 100%;
+  padding: 18px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: opacity 0.2s;
+
+  &:hover { opacity: 0.8; }
+  &:disabled { background: #e5e5e5; cursor: not-allowed; }
+}
+
+.user-display {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #111;
+  .edit-link {
+    font-size: 12px;
+    text-decoration: underline;
+    cursor: pointer;
+    color: #757575;
+    margin-left: 8px;
+  }
+}
+
+.error-msg {
+  color: #d32f2f;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.terms {
+  font-size: 12px;
+  color: #757575;
+  margin: 20px 0;
+  a { color: #757575; text-decoration: underline; }
+}
+
+.fade-in { animation: fadeIn 0.3s ease-in; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
