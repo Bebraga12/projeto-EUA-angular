@@ -2,114 +2,153 @@
   display: flex;
   justify-content: center;
   min-height: 100vh;
-  background-color: #fff;
-  padding-top: 80px;
+  background: #fff;
+  padding-top: 40px;
   font-family: "Helvetica Now", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .login-box {
   width: 100%;
-  max-width: 440px;
+  max-width: 480px;
   padding: 0 20px;
-  
-  .brand-logo {
-    font-size: 22px;
-    font-weight: 900;
-    margin-bottom: 25px;
-  }
 
-  h1 {
-    font-size: 26px;
-    font-weight: 500;
-    line-height: 1.2;
-    margin-bottom: 25px;
-    color: #111;
+  h1 { 
+    font-size: 26px; 
+    font-weight: 500; 
+    line-height: 1.2; 
+    margin-bottom: 20px; 
+    color: #111; 
   }
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+  .input-wrapper { flex: 1; }
 }
 
 .input-wrapper {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 20px; // Aumentei um pouco para caber a msg de erro
 
   input {
     width: 100%;
-    padding: 18px 12px 10px;
-    font-size: 16px;
+    padding: 16px 40px 8px 12px; // Padding direito maior para o ícone do olho não ficar em cima do texto
     border: 1px solid #e5e5e5;
     border-radius: 4px;
-    background: #fff !important; 
+    font-size: 16px;
+    background: #fff !important;
     outline: none;
     box-sizing: border-box;
 
-    &:-webkit-autofill {
-      -webkit-box-shadow: 0 0 0 50px white inset !important;
-    }
-
     &:focus { border-color: #111; }
 
-    &:focus + label,
+    &:focus + label, 
     &:not(:placeholder-shown) + label {
-      top: -8px;
-      left: 10px;
+      top: 6px; 
       font-size: 11px;
-      color: #757575;
-      background: white;
-      padding: 0 4px;
+    }
+    
+    // Valid e Invalid states (opcional para borda vermelha)
+    &.ng-touched.ng-invalid {
+      border-color: #d32f2f;
     }
   }
 
   label {
-    position: absolute;
-    left: 12px;
-    top: 16px;
+    position: absolute; 
+    left: 12px; 
+    top: 16px; 
     color: #757575;
-    transition: all 0.2s ease;
+    transition: all 0.2s ease; 
     pointer-events: none;
     z-index: 1;
   }
 }
 
-.btn-black {
-  width: 100%;
-  padding: 18px;
-  background: #111;
-  color: #fff;
+// Estilo da mensagem de erro
+.error-msg {
+  color: #d32f2f;
+  font-size: 12px;
+  margin-top: 5px;
+  display: block;
+}
+
+// Ícone do Olho
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 16px;
+  cursor: pointer;
+  background: none;
   border: none;
+  padding: 0;
+  z-index: 10;
+  
+  svg {
+    width: 24px;
+    height: 24px;
+    fill: #111;
+  }
+}
+
+.btn-black {
+  width: 100%; padding: 18px; background: #111; color: #fff;
+  border: none; border-radius: 30px; font-weight: 600; cursor: pointer;
+  margin-top: 15px;
+  &:hover { opacity: 0.8; }
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.btn-outline {
+  width: 100%;
+  padding: 16px;
+  background: transparent;
+  color: #111;
+  border: 1px solid #e5e5e5;
   border-radius: 30px;
   font-weight: 600;
   font-size: 16px;
   cursor: pointer;
-  margin-top: 10px;
-  transition: opacity 0.2s;
+  transition: border-color 0.2s;
 
-  &:hover { opacity: 0.8; }
-  &:disabled { background: #e5e5e5; cursor: not-allowed; }
-}
-
-.user-display {
-  font-size: 14px;
-  margin-bottom: 20px;
-  color: #111;
-  .edit-link {
-    font-size: 12px;
-    text-decoration: underline;
-    cursor: pointer;
-    color: #757575;
-    margin-left: 8px;
+  &:hover {
+    border-color: #111;
   }
 }
 
-.error-msg {
-  color: #d32f2f;
-  font-size: 12px;
-  margin-top: 6px;
+// Links e textos auxiliares
+.edit-link {
+  font-size: 14px;
+  text-decoration: underline;
+  color: #757575;
+  margin-left: 5px;
+  cursor: pointer; // Cursor mãozinha
+  &:hover { color: #111; }
+}
+
+.user-display {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #111;
+}
+
+.hint { font-size: 11px; color: #757575; display: block; margin-top: 4px; }
+.label-small { font-size: 14px; margin: 15px 0 5px; color: #111; }
+
+.checkbox-container {
+  display: flex; gap: 10px; font-size: 12px; color: #757575; align-items: flex-start; margin: 20px 0;
+  input { margin-top: 3px; }
 }
 
 .terms {
-  font-size: 12px;
-  color: #757575;
-  margin: 20px 0;
-  a { color: #757575; text-decoration: underline; }
+  font-size: 12px; color: #757575; margin-top: 15px;
 }
 
 .fade-in { animation: fadeIn 0.3s ease-in; }
