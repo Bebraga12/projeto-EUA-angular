@@ -1,0 +1,29 @@
+@if (cartService.isVisible()) {
+    <div class="cart-floater">
+        <div class="cart-header">
+            <h4>Your Bag ({{ cartService.items().length }})</h4>
+            <button class="close-btn" (click)="cartService.toggleCart()">×</button>
+        </div>
+
+        <div class="cart-items">
+            @for (item of cartService.items(); track $index) {
+                <div class="cart-item">
+                    <img [src]="item.image" alt="">
+                    <div class="info">
+                        <span>{{ item.name }}</span>
+                        <strong>{{ item.price | currency:'BRL' }}</strong>
+                    </div>
+                    <button class="remove-btn" (click)="cartService.removeFromCart($index)">🗑️</button>
+                </div>
+            }
+        </div>
+
+        <div class="cart-footer">
+            <div class="total">
+                <span>Total:</span>
+                <span>{{ cartService.total() | currency:'BRL' }}</span>
+            </div>
+            <button class="checkout-btn">Checkout</button>
+        </div>
+    </div>
+}

@@ -1,0 +1,103 @@
+$font-main: 'Helvetica Neue', sans-serif;
+$color-black: #1a1a1a;
+$color-gray: #888;
+$color-white: #ffffff;
+
+.card {
+    width: 100%;
+    font-family: $font-main;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    &__image-wrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 3 / 4; 
+        background-color: #f0f0f0;
+        overflow: hidden; 
+        border-radius: 4px;
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; 
+        transition: transform 0.6s ease; 
+    }
+
+    &__badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: $color-black;
+        color: $color-white;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 5px 8px;
+        text-transform: uppercase;
+        z-index: 2;
+    }
+
+    &__btn-add {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 15px;
+        background: rgba(0, 0, 0, 0.9);
+        color: $color-white;
+        border: none;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        
+        transform: translateY(100%); 
+        transition: transform 0.3s ease;
+        z-index: 2;
+
+        &:hover {
+            background: $color-black; 
+        }
+    }
+
+    &:hover {
+        .card__img {
+            transform: scale(1.05); 
+        }
+
+        .card__btn-add {
+            transform: translateY(0);
+        }
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    &__category {
+        font-size: 0.75rem;
+        color: $color-gray;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    &__title {
+        font-size: 1rem;
+        font-weight: 500;
+        color: $color-black;
+        margin: 0;
+        line-height: 1.4;
+    }
+
+    &__price {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: $color-black;
+        margin: 4px 0 0 0;
+    }
+}

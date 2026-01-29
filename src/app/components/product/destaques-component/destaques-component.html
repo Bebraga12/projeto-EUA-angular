@@ -1,0 +1,12 @@
+<section class="showcase">
+    <div class="showcase__header">
+        <h2>Latest Drops</h2>
+        <a href="#" class="showcase__link">View All</a>
+    </div>
+
+    <div class="showcase__grid">
+        @for (item of products; track item.id) {
+            <app-product-card-component [product]="item"></app-product-card-component>
+        }
+    </div>
+</section>
