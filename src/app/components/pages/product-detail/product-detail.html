@@ -1,0 +1,95 @@
+<app-navbar></app-navbar>
+
+<div class="page-layout">
+    
+    <div class="backdrop" *ngIf="isFilterOpen" (click)="toggleFilter()"></div>
+
+    <button class="filter-tab" (click)="toggleFilter()" *ngIf="!isFilterOpen">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+    </button>
+
+    <aside class="filter-drawer" [class.open]="isFilterOpen">
+        <div class="drawer-header">
+            <span>FILTERS</span>
+            <button class="btn-close" (click)="toggleFilter()">×</button>
+        </div>
+        <div class="drawer-content">
+            <app-sidebar></app-sidebar>
+        </div>
+    </aside>
+
+    <main class="product-content">
+        @if (product) {
+            <div class="detail-container">
+                <div class="detail-image">
+                    <img [src]="product.image" [alt]="product.name">
+                </div>
+
+                <div class="detail-info">
+                    <span class="category">{{ product.category }}</span>
+                    <h1>{{ product.name }}</h1>
+                    
+                    <div class="rating-row">
+                        <div class="stars">★★★★★</div>
+                        <span class="rating-count">4.9 (128 reviews)</span>
+                    </div>
+
+                    <div class="price-block">
+                        <p class="price">{{ product.price | currency:'USD' }}</p>
+                        <p class="installments">or 6x of {{ (product.price / 6) | currency:'USD' }} interest-free</p>
+                    </div>
+
+                    <div class="selector-section">
+                        <h3>Colors</h3>
+                        <div class="color-options">
+                            <button class="color-btn active" style="background-color: #f0f0f0;"></button>
+                            <button class="color-btn" style="background-color: #1a1a1a;"></button>
+                            <button class="color-btn" style="background-color: #8b0000;"></button>
+                        </div>
+                    </div>
+
+                    <div class="selector-section">
+                        <div class="section-header">
+                            <h3>Size</h3>
+                            <a href="#" class="size-guide">Size Guide</a>
+                        </div>
+                        <div class="size-options">
+                            <button>S</button>
+                            <button class="active">M</button>
+                            <button>L</button>
+                            <button>XL</button>
+                            <button disabled>XXL</button>
+                        </div>
+                    </div>
+                    
+                    <p class="description">
+                        {{ product.description || 'Minimalist design met with premium cotton. The perfect fit for your daily rotation. Wash cold, hang dry.' }}
+                    </p>
+
+                    <div class="actions">
+                        <button class="btn-add" (click)="addToCart()">Add to Cart</button>
+                        <button class="btn-favorite">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        </button>
+                    </div>
+
+                    <div class="shipping-calc">
+                        <h3>Calculate Shipping</h3>
+                        <div class="shipping-input-group">
+                            <input type="text" placeholder="Zip Code (00000-000)">
+                            <button>Calculate</button>
+                        </div>
+                        <a href="#" class="shipping-link">Shipping & Returns Policy</a>
+                    </div>
+                </div>
+            </div>
+        } @else {
+            <p>Product not found.</p>
+        }
+    </main>
+</div>
+<app-related-products></app-related-products>
+<app-footer-component></app-footer-component>

@@ -1,19 +1,16 @@
-<section class="info-bar">
-    <div class="info-bar__container">
-        @for (item of infoItems; track $index) {
-            <div class="info-bar__item">
-                <div class="info-bar__icon-circle">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path [attr.d]="item.iconPath"></path>
-                        @if ($index === 0) {
-                             <circle cx="5.5" cy="18.5" r="2.5"></circle>
-                             <circle cx="18.5" cy="18.5" r="2.5"></circle>
-                        }
-                    </svg>
+<section class="category-showcase">
+    <div class="grid-container">
+        @for (cat of categories; track $index) {
+            <a [routerLink]="cat.link" class="category-card">
+                
+                <div class="image-wrapper">
+                    <img [src]="cat.image" [alt]="cat.title">
                 </div>
-                <h3 class="info-bar__title">{{ item.title }}</h3>
-                <p class="info-bar__subtitle">{{ item.subtitle }}</p>
-            </div>
+
+                <div class="category-label">
+                    {{ cat.title }}
+                </div>
+            </a>
         }
     </div>
 </section>

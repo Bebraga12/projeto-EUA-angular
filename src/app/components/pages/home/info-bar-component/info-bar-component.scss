@@ -1,76 +1,76 @@
-// info-bar-component.scss
+.category-showcase {
+    width: 100%;
+    max-width: 1600px; // Largura máxima para monitores grandes
+    margin: 60px auto; // Espaçamento vertical
+    padding: 0 20px;   // Margem lateral segura
+    font-family: 'Helvetica Neue', sans-serif;
+}
 
-$color-text: #1a1a1a;
-$color-subtext: #666;
-// Cor de fundo leve (similar à imagem enviada)
-$bg-color: #E8EBE9; 
-$icon-color: #8C7B60; // Tom dourado/marrom da imagem
-$breakpoint-mobile: 768px;
-
-.info-bar {
-    background-color: $bg-color;
-    padding: 60px 5%;
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; // 3 Colunas iguais
+    gap: 20px; // Espaço entre as fotos
     width: 100%;
 
-    &__container {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        max-width: 1400px;
-        margin: 0 auto;
-        gap: 30px;
+    // No celular vira uma coluna só
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}
 
-        // No mobile, vira um grid 2x2
-        @media (max-width: $breakpoint-mobile) {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px 20px;
+.category-card {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 600px; // Altura fixa para ficar imponente (como na foto da Nike)
+    border-radius: 4px;
+    overflow: hidden; // Impede a imagem de sair ao dar zoom
+    cursor: pointer;
+    text-decoration: none;
+
+    // Ajuste de altura para telas menores
+    @media (max-width: 1200px) { height: 500px; }
+    @media (max-width: 768px) { height: 450px; }
+
+    .image-wrapper {
+        width: 100%;
+        height: 100%;
+        
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; // Garante que a imagem preencha tudo sem distorcer
+            object-position: center;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); // Animação suave
         }
     }
 
-    &__item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        flex: 1;
-    }
-
-    &__icon-circle {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        background-color: rgba($icon-color, 0.1); // Círculo com transparência
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 20px;
-        color: $icon-color;
-        transition: transform 0.3s ease;
-
-        svg {
-            width: 28px;
-            height: 28px;
-        }
-
-        &:hover {
-            transform: scale(1.1);
+    // Efeito de Hover (Zoom na imagem)
+    &:hover {
+        .image-wrapper img {
+            transform: scale(1.05); // Aumenta 5%
         }
     }
 
-    &__title {
-        font-size: 1rem;
-        font-weight: 600;
-        color: $color-text;
-        margin-bottom: 8px;
+    // A etiqueta branca no canto inferior esquerdo
+    .category-label {
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+        background-color: #ffffff;
+        color: #111;
+        padding: 12px 25px;
+        border-radius: 30px; // Deixa bem redondo (Pill shape)
+        font-weight: 700;
+        font-size: 0.95rem;
         letter-spacing: 0.5px;
-        font-family: 'Helvetica Neue', sans-serif; // Ou a fonte que estiver usando
-    }
+        z-index: 2;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15); // Sombra suave para destacar
+        transition: transform 0.2s ease;
 
-    &__subtitle {
-        font-size: 0.85rem;
-        color: $color-subtext;
-        line-height: 1.4;
-        max-width: 200px;
+        // Se quiser que o botão suba um pouquinho no hover
+        &:hover {
+            transform: scale(1.05);
+        }
     }
 }

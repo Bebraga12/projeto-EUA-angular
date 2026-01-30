@@ -11,7 +11,7 @@
                     <img [src]="item.image" alt="">
                     <div class="info">
                         <span>{{ item.name }}</span>
-                        <strong>{{ item.price | currency:'BRL' }}</strong>
+                        <strong>{{ item.price | currency:'USD' }}</strong>
                     </div>
                     <button class="remove-btn" (click)="cartService.removeFromCart($index)">🗑️</button>
                 </div>
@@ -21,9 +21,9 @@
         <div class="cart-footer">
             <div class="total">
                 <span>Total:</span>
-                <span>{{ cartService.total() | currency:'BRL' }}</span>
+                <span>{{ cartService.total() | currency:'USD' }}</span>
             </div>
-            <button class="checkout-btn">Checkout</button>
+            <button class="checkout-btn" (click)="finalizeOrder()">Checkout</button>
         </div>
     </div>
 }

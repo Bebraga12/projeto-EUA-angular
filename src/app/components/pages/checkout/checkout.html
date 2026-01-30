@@ -1,0 +1,111 @@
+<app-navbar></app-navbar>
+
+<div class="checkout-page">
+    <div class="checkout-grid">
+        
+        <div class="form-column">
+            <div class="section-group">
+                <h2>CONTACT INFORMATION</h2>
+                <div class="input-group">
+                    <input type="email" placeholder="Email Address">
+                </div>
+            </div>
+
+            <div class="section-group">
+                <h2>SHIPPING ADDRESS</h2>
+                <div class="row">
+                    <input type="text" placeholder="First Name">
+                    <input type="text" placeholder="Last Name">
+                </div>
+                <div class="input-group">
+                    <input type="text" placeholder="Address">
+                </div>
+                <div class="input-group">
+                    <input type="text" placeholder="Apartment, suite, etc. (optional)">
+                </div>
+                <div class="row three-col">
+                    <input type="text" placeholder="City">
+                    <input type="text" placeholder="State">
+                    <input type="text" placeholder="Zip Code">
+                </div>
+                <div class="input-group">
+                    <input type="tel" placeholder="Phone">
+                </div>
+            </div>
+
+            <div class="section-group">
+                <h2>PAYMENT</h2>
+                <div class="payment-box">
+                    <div class="payment-header">
+                        <span>Credit Card</span>
+                        <div class="icons">
+                            <div class="card-icon"></div>
+                            <div class="card-icon"></div>
+                        </div>
+                    </div>
+                    <div class="payment-body">
+                        <div class="input-group">
+                            <input type="text" placeholder="Card Number">
+                        </div>
+                        <div class="row">
+                            <input type="text" placeholder="Expiration (MM/YY)">
+                            <input type="text" placeholder="Security Code">
+                        </div>
+                        <div class="input-group">
+                            <input type="text" placeholder="Name on Card">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-pay-mobile" (click)="processPayment()">PAY {{ total() | currency:'USD' }}</button>
+        </div>
+
+        <div class="summary-column">
+            <div class="summary-card">
+                <h3>ORDER SUMMARY</h3>
+                
+                <div class="cart-items-list">
+                    @for (item of cartItems(); track $index) {
+                        <div class="item-row">
+                            <div class="item-img">
+                                <img [src]="item.image" [alt]="item.name">
+                                <span class="qty-badge">1</span>
+                            </div>
+                            <div class="item-details">
+                                <span class="name">{{ item.name }}</span>
+                                <span class="variant">{{ item.category }}</span>
+                            </div>
+                            <div class="item-price">
+                                {{ item.price | currency:'USD' }}
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="discount-row">
+                    <input type="text" placeholder="Discount code">
+                    <button>APPLY</button>
+                </div>
+
+                <div class="totals-block">
+                    <div class="line">
+                        <span>Subtotal</span>
+                        <span>{{ subtotal() | currency:'USD' }}</span>
+                    </div>
+                    <div class="line">
+                        <span>Shipping</span>
+                        <span>{{ shipping | currency:'USD' }}</span>
+                    </div>
+                    <div class="line total">
+                        <span>Total</span>
+                        <span>{{ total() | currency:'USD' }}</span>
+                    </div>
+                </div>
+
+                <button class="btn-pay" (click)="processPayment()">PAY NOW</button>
+            </div>
+        </div>
+
+    </div>
+</div>

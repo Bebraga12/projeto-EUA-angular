@@ -13,11 +13,10 @@ export class LoginComponent {
   loginForm: FormGroup;
   showPasswordStep = false;
   isRegistering = false;
-  passwordVisible = false; // Controle do olho
+  passwordVisible = false; 
 
   constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {
     this.loginForm = this.fb.group({
-      // Atualizei o Regex para aceitar Maiúsculas (a-zA-Z)
       email: ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$")]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       firstName: [''],
@@ -29,44 +28,41 @@ export class LoginComponent {
     });
   }
 
-  // Alterna entre texto e senha
   togglePasswordVisibility() {
     this.passwordVisible = !this.passwordVisible;
   }
 
-  // Avança para senha se o email for válido
   handleEmailStep() {
     const emailControl = this.loginForm.get('email');
     if (emailControl?.valid) {
       this.showPasswordStep = true;
       this.isRegistering = false;
     } else {
-      emailControl?.markAsTouched(); // Isso dispara a msg de erro no HTML
+      emailControl?.markAsTouched(); 
     }
   }
 
-  // Vai para o registro (se email válido)
   goToRegister() {
     const emailControl = this.loginForm.get('email');
     if (emailControl?.valid) {
       this.isRegistering = true;
       this.showPasswordStep = false;
     } else {
-      emailControl?.markAsTouched(); // Mostra erro se tentar criar conta sem email
+      emailControl?.markAsTouched(); 
     }
   }
 
   editEmail() {
     this.showPasswordStep = false;
     this.isRegistering = false;
-    this.passwordVisible = false; // Reseta o olho ao voltar
+    this.passwordVisible = false; 
     this.loginForm.get('password')?.reset();
     this.cdr.markForCheck();
   }
 
   submitAction() {
     if (this.isRegistering) {
-      if (this.loginForm.valid) { // Validação simples
+      if (this.loginForm.valid) { 
           console.log('Registering user:', this.loginForm.value);
       }
     } else if (this.loginForm.get('password')?.valid) {

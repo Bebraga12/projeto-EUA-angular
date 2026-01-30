@@ -1,0 +1,28 @@
+<section class="related-section" *ngIf="infiniteProducts.length > 0">
+    <div class="content-container">
+        <div class="section-header">
+            <h2 class="title">You may also like</h2>
+            <div class="decoration-line"></div>
+        </div>
+    </div>
+    
+    <div class="carousel-wrapper">
+        <button class="nav-btn prev" (click)="scrollLeft()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+
+        <div class="viewport" #scrollContainer>
+            <div class="track">
+                @for (item of infiniteProducts; track $index) {
+                    <div class="card-wrapper">
+                        <app-product-card-component [product]="item"></app-product-card-component>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <button class="nav-btn next" (click)="scrollRight()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+    </div>
+</section>

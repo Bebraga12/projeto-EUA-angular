@@ -1,0 +1,254 @@
+$font-main: 'Helvetica Neue', sans-serif;
+
+.sidebar {
+    width: 100%;
+    height: 100%;
+    font-family: $font-main;
+}
+
+.sidebar-card-content {
+    background: transparent; 
+    border: none; 
+    padding: 20px 35px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .divider-full {
+        height: 1px;
+        background: rgba(0, 0, 0, 0.05);
+        margin: 25px 0; 
+    }
+
+    .search-header {
+        margin-bottom: 10px;
+        
+        h2 {
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            opacity: 0.8;
+        }
+
+        .search-box-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #fff; 
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+
+            &:focus-within {
+                border-color: #000;
+            }
+
+            svg { color: #666; width: 18px; height: 18px;}
+
+            input {
+                width: 100%;
+                border: none;
+                background: transparent;
+                outline: none;
+                font-size: 0.9rem;
+                font-family: inherit;
+                color: #000;
+                
+                &::placeholder { color: #999; font-weight: 400; }
+            }
+        }
+
+        .btn-search-action {
+            width: 100%;
+            background: #111;
+            color: #fff;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            
+            &:hover { background: #333; transform: translateY(-1px); }
+            &:active { transform: scale(0.98); }
+        }
+    }
+
+    .filter-group {
+        padding-bottom: 5px;
+
+        &.no-border { border-bottom: none; }
+
+        h3 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 800;
+            margin-bottom: 18px;
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            li { margin-bottom: 12px; }
+        }
+    }
+    
+    .filter-group:last-child {
+        margin-top: auto; 
+    }
+}
+
+// ... (Resto do CSS de price-header-row, checkbox-container, etc, permanece igual)
+.price-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    h3 { margin-bottom: 0 !important; }
+}
+
+.price-input-box {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 6px;
+    padding: 6px 10px;
+    width: 80px;
+
+    span { font-size: 0.9rem; color: #000; margin-right: 4px; font-weight: 600;}
+    input {
+        width: 100%;
+        border: none;
+        background: transparent;
+        font-weight: 700;
+        font-size: 0.9rem;
+        outline: none;
+        text-align: right;
+        &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 32px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #444;
+    font-weight: 500;
+    user-select: none;
+    min-height: 20px;
+    transition: color 0.2s;
+
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0; width: 0;
+        &:checked ~ .checkmark {
+            background-color: #111;
+            border-color: #111;
+        }
+        &:checked ~ .checkmark:after { display: block; }
+    }
+
+    .checkmark {
+        position: absolute;
+        left: 0;
+        height: 20px; width: 20px;
+        background-color: transparent;
+        border: 2px solid #ccc;
+        border-radius: 6px;
+        transition: all 0.2s;
+
+        &:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 6px; top: 2px;
+            width: 5px; height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+    }
+    &:hover { color: #000; .checkmark { border-color: #000; } }
+}
+
+.size-grid {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    
+    .size-btn {
+        flex: 1;
+        min-width: 45px;
+        height: 45px;
+        border: 1px solid #ddd;
+        background: #fff;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 0.9rem;
+        border-radius: 8px;
+        transition: all 0.2s;
+        color: #555;
+
+        &:hover { border-color: #000; color: #000; }
+        &.active {
+            border-color: #111;
+            background: #111;
+            color: #fff;
+        }
+    }
+}
+
+.slider {
+    width: 100%;
+    height: 4px;
+    background: #e0e0e0;
+    border-radius: 2px;
+    outline: none;
+    -webkit-appearance: none;
+    accent-color: #000;
+    cursor: pointer;
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 18px;
+        height: 18px;
+        background: #111;
+        border: 2px solid #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: transform 0.1s;
+        &:active { transform: scale(1.1); }
+    }
+}
+
+.price-range {
+    margin-top: 25px;
+    .price-labels {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 12px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #888;
+    }
+}

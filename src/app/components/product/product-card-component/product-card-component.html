@@ -1,17 +1,29 @@
 <div class="card">
+    
     <div class="card__image-wrapper">
+        
         @if (product.isNew) {
             <span class="card__badge">NEW</span>
         }
 
-        <img [src]="product.image" [alt]="product.name" class="card__img">
+        <img 
+            [src]="product.image" 
+            [alt]="product.name" 
+            class="card__img" 
+            [routerLink]="['/product', product.id]"
+            style="cursor: pointer">
         
         <button class="card__btn-add" (click)="addToCart()">Add to Cart</button>
     </div>
 
     <div class="card__info">
         <span class="card__category">{{ product.category }}</span>
-        <h3 class="card__title">{{ product.name }}</h3>
-        <p class="card__price">{{ product.price | currency:'BRL' }}</p>
+        
+        <h3 class="card__title" [routerLink]="['/product', product.id]" style="cursor: pointer">
+            {{ product.name }}
+        </h3>
+        
+        <p class="card__price">{{ product.price | currency:'USD' }}</p>
     </div>
+
 </div>

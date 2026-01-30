@@ -1,21 +1,17 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-// --- AQUI ESTÁ A CORREÇÃO DO ERRO ---
-// Estamos importando o componente E o model 'Product' do outro arquivo
-// Nota: Se der erro de caminho, verifique se a pasta se chama 'product-card-component' mesmo
 import { ProductCardComponent, Product } from '../product-card-component/product-card-component'; 
+import { SidebarComponent } from '../../layout/sidebar/sidebar';
 
 @Component({
   selector: 'app-destaques-component',
   standalone: true,
-  imports: [CommonModule, ProductCardComponent], 
+  imports: [CommonModule, ProductCardComponent, SidebarComponent], 
   templateUrl: './destaques-component.html',
   styleUrl: './destaques-component.scss'
 })
 export class DestaquesComponent {
   
-  // O erro sumirá porque agora ele sabe o que é 'Product'
   products: Product[] = Array.from({ length: 10 }, (_, i) => ({
     id: i,
     name: i % 2 === 0 ? 'Essential Tee Black' : 'Urban Graphic Shirt',

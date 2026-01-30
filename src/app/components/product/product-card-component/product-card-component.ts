@@ -1,6 +1,8 @@
 import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CartService } from '../../../services/cart/cart';
+import { RouterLink } from '@angular/router';
+// Verifique se o caminho do seu service é este mesmo ou se termina em .service
+import { CartService } from '../../../services/cart/cart'; // ou './cart.service'
 
 export interface Product {
   id: number;
@@ -9,12 +11,13 @@ export interface Product {
   image: string;
   category: string;
   isNew?: boolean;
+  description?: string;
 }
 
 @Component({
   selector: 'app-product-card-component',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink], // RouterLink OBRIGATÓRIO aqui
   templateUrl: './product-card-component.html',
   styleUrl: './product-card-component.scss'
 })
@@ -24,8 +27,9 @@ export class ProductCardComponent {
   cartService = inject(CartService); 
 
   addToCart() {
+    // Ação do botão
     console.log('Adicionando ao carrinho:', this.product.name); 
-    
     this.cartService.addToCart(this.product);
+    
   }
 }
