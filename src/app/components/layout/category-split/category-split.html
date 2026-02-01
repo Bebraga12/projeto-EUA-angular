@@ -1,0 +1,16 @@
+<section class="split-container">
+    @for (cat of categories; track $index) {
+        <div class="category-panel" 
+             [style.background-image]="'url(' + cat.image + ')'"
+             (click)="navigateTo(cat.link)">
+            
+            <div class="overlay"></div>
+            
+            <h2 class="category-title">{{ cat.title }}</h2>
+            
+            <div class="pill-button">
+                {{ cat.label }}
+            </div>
+        </div>
+    }
+</section>

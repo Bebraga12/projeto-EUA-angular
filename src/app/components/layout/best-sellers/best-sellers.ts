@@ -1,17 +1,25 @@
 import { Component, ElementRef, ViewChild, AfterViewInit, HostListener, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { ProductCardComponent, Product } from '../product-card-component/product-card-component'; 
-import { CartService } from '../../../services/cart/cart'; // Importe seu serviço de carrinho
+import { CartService } from '../../../services/cart/cart'; // Verifique se o caminho está correto para seu projeto
+
+// Interface simples caso não esteja importando de outro lugar
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+  category: string;
+}
 
 @Component({
-  selector: 'app-destaques-component',
+  selector: 'app-best-sellers',
   standalone: true,
-  imports: [CommonModule, ProductCardComponent], 
-  templateUrl: './destaques-component.html',
-  styleUrl: './destaques-component.scss'
+  imports: [CommonModule],
+  templateUrl: './best-sellers.html',
+  styleUrl: './best-sellers.scss'
 })
-export class DestaquesComponent implements AfterViewInit {
+export class BestSellers implements AfterViewInit {
   // Injeção de dependências
   private router = inject(Router);
   cartService = inject(CartService);
@@ -26,20 +34,23 @@ export class DestaquesComponent implements AfterViewInit {
   startX = 0;
   startScrollLeft = 0;
 
-  products: Product[] = Array.from({ length: 10 }, (_, i) => ({
-    id: i,
-    name: i % 2 === 0 ? 'Essential Tee Black' : 'Urban Graphic Shirt',
-    price: i % 2 === 0 ? 129.90 : 159.90,
-    image: i % 2 === 0 ? 'assets/produtos/camisa1.png' : 'assets/produtos/camisa2.png',
-    category: i % 2 === 0 ? 'Basic' : 'Streetwear',
-    isNew: i < 2 
+  // Mock de dados para Best Sellers
+  products: Product[] = Array.from({ length: 8 }, (_, i) => ({
+    id: i + 100, // IDs diferentes para não conflitar
+    name: i % 2 === 0 ? 'Vintage Track Jacket' : 'Urban Oversized Hoodie',
+    price: i % 2 === 0 ? 189.90 : 229.90,
+    // Usei imagens genéricas de placeholder, troque pelas suas assets
+    image: i % 2 === 0 
+      ? 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=1000&auto=format&fit=crop' 
+      : 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=1000&auto=format&fit=crop',
+    category: 'Best Seller'
   }));
 
   ngAfterViewInit() {
     this.updateScrollIndicator();
   }
 
-  // --- LÓGICA DE NAVEGAÇÃO E CARRINHO ---
+  // --- NAVEGAÇÃO E CARRINHO ---
 
   goToProduct(id: number) {
     if (!this.isDragging) {
@@ -48,16 +59,16 @@ export class DestaquesComponent implements AfterViewInit {
   }
 
   addToCart(product: Product, event: Event) {
-    event.stopPropagation(); // Impede que o clique abra a página do produto
+    event.stopPropagation();
     this.cartService.addToCart(product);
   }
 
   toggleWishlist(event: Event) {
-    event.stopPropagation(); // Impede navegação ao clicar no coração
-    // Lógica de wishlist aqui se tiver serviço
+    event.stopPropagation();
+    // Lógica de wishlist aqui
   }
 
-  // --- LÓGICA DO CARROSSEL (MANTIDA) ---
+  // --- LÓGICA DO CARROSSEL ---
 
   scrollLeft() {
     this.carousel.nativeElement.scrollBy({ left: -300, behavior: 'smooth' });

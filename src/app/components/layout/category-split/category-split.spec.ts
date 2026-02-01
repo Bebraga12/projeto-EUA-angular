@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DestaquesComponent } from './destaques-component';
+import { CategorySplit } from './category-split';
 
-describe('DestaquesComponent', () => {
-  let component: DestaquesComponent;
-  let fixture: ComponentFixture<DestaquesComponent>;
+describe('CategorySplit', () => {
+  let component: CategorySplit;
+  let fixture: ComponentFixture<CategorySplit>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DestaquesComponent]
+      imports: [CategorySplit]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DestaquesComponent);
+    fixture = TestBed.createComponent(CategorySplit);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
