@@ -1,17 +1,17 @@
 .split-container {
     display: flex;
     justify-content: center;
-    width: 110%;
+    width: 100%; /* Corrigido: 110% causa rolagem horizontal */
     max-width: 1440px; 
-    height: 800px; 
-    margin: 80px auto; 
-    padding: 0 24px;
-    gap: 100px; 
+    margin: 40px auto; /* Reduzido para ficar mais harmonico */
+    padding: 0 16px; /* Padding lateral seguro */
+    gap: 24px; /* Gap ajustado para não quebrar em telas médias */
     box-sizing: border-box;
 
     .category-panel {
         flex: 1; 
         position: relative;
+        height: 600px; /* Altura ajustada (800px é muito alto para maioria dos laptops) */
         background-size: cover;
         background-position: center;
         cursor: pointer;
@@ -22,6 +22,7 @@
         justify-content: space-between; 
         padding: 40px;
         border-radius: 12px; 
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 
         &:hover {
             transform: translateY(-5px); 
@@ -45,7 +46,7 @@
             z-index: 2;
             color: #fff;
             font-family: 'Helvetica Neue', sans-serif;
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 800;
             text-transform: uppercase;
             margin: 0;
@@ -73,16 +74,26 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .split-container {
-        flex-direction: column; 
+        flex-direction: column;
         height: auto; 
-        margin: 40px auto; 
+        margin: 24px auto; 
         gap: 16px; 
 
         .category-panel {
-            height: 400px; 
             width: 100%;
+            height: 300px; 
+            padding: 24px; 
+
+            .category-title {
+                font-size: 1.8rem;
+            }
+
+            .pill-button {
+                padding: 10px 24px;
+                font-size: 0.85rem;
+            }
         }
     }
 }

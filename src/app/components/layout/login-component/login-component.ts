@@ -1,6 +1,7 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login-component',
@@ -9,13 +10,17 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
   templateUrl: './login-component.html',
   styleUrls: ['./login-component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   showPasswordStep = false;
   isRegistering = false;
   passwordVisible = false; 
 
-  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {
+  constructor(
+    private fb: FormBuilder, 
+    private cdr: ChangeDetectorRef,
+    private route: ActivatedRoute 
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$")]],
       password: ['', [Validators.required, Validators.minLength(8)]],
@@ -25,6 +30,19 @@ export class LoginComponent {
       month: [''],
       year: [''],
       agreeTerms: [false]
+    });
+  }
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      const emailFromFooter = params['email'];
+      
+      if (emailFromFooter) {
+        this.loginForm.patchValue({ email: emailFromFooter });
+        this.loginForm.get('email')?.updateValueAndValidity();
+        this.isRegistering = true;
+        this.showPasswordStep = false;
+      }
     });
   }
 
@@ -57,6 +75,9 @@ export class LoginComponent {
     this.isRegistering = false;
     this.passwordVisible = false; 
     this.loginForm.get('password')?.reset();
+    
+    window.history.replaceState({}, document.title, window.location.pathname);
+    
     this.cdr.markForCheck();
   }
 

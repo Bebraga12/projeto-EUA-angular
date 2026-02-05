@@ -3,12 +3,19 @@
         <div class="footer__column footer__column--wide">
             <h3 class="footer__title">Newsletter</h3>
             <p class="footer__text">Subscribe to receive updates, access to exclusive deals, and more.</p>
-            <form class="footer__form">
-                <input type="email" placeholder="Enter your email address" class="footer__input">
-                <button type="submit" class="footer__button">Subscribe</button>
-            </form>
+            
+            <div class="footer__form">
+                <input 
+                    type="email" 
+                    [(ngModel)]="emailNewsletter" 
+                    (keyup.enter)="subscribe()" 
+                    placeholder="Enter your email address" 
+                    class="footer__input">
+        
+                <button (click)="subscribe()" class="footer__button">Subscribe</button>
+            </div>
         </div>
-
+        
         <div class="footer__column">
             <h3 class="footer__title">Customer Care</h3>
             <ul class="footer__list">
